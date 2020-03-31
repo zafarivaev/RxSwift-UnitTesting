@@ -26,7 +26,18 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1C2FD3A32430D6AB00E2C8C8"
+            BuildableName = "RxSwift-Testing.app"
+            BlueprintName = "RxSwift-Testing"
+            ReferencedContainer = "container:RxSwift-Testing.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">

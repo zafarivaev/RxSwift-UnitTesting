@@ -59,6 +59,27 @@ class ViewModelTests: XCTestCase {
     }
     
     // MARK: - RxBlocking
+    func testWhenFirstIsSelectedSecondAndThirdAreDisabled() {
+        let isFirstEnabled = viewModel.isFirstEnabled.subscribeOn(scheduler)
+        let isSecondEnabled = viewModel.isSecondEnabled.subscribeOn(scheduler)
+        let isThirdEnabled = viewModel.isThirdEnabled.subscribeOn(scheduler)
+        
+        // When
+        viewModel.didSelectFirst.accept(true)
+        viewModel.didSelectSecond.accept(false)
+        viewModel.didSelectThird.accept(false)
+        
+        // Then
+        XCTAssertEqual([try isFirstEnabled.toBlocking().first(),
+                        try isSecondEnabled.toBlocking().first(),
+                        try isThirdEnabled.toBlocking().first()],
+                       [
+                        true,
+                        false,
+                        false
+        ])
+    }
+    
     func testWhenSecondIsSelectedFirstAndThirdAreDisabled() {
         let isFirstEnabled = viewModel.isFirstEnabled.subscribeOn(scheduler)
         let isSecondEnabled = viewModel.isSecondEnabled.subscribeOn(scheduler)
@@ -66,6 +87,8 @@ class ViewModelTests: XCTestCase {
         
         // When
         viewModel.didSelectSecond.accept(true)
+        viewModel.didSelectFirst.accept(false)
+        viewModel.didSelectThird.accept(false)
         
         // Then
         XCTAssertEqual([try isFirstEnabled.toBlocking().first(),
@@ -88,9 +111,9 @@ class ViewModelTests: XCTestCase {
         viewModel.didSelectSecond.accept(false)
         viewModel.didSelectThird.accept(false)
         
-        viewModel.didSelectSecond.accept(true)
+        viewModel.didSelectThird.accept(true)
         viewModel.didSelectFirst.accept(false)
-        viewModel.didSelectThird.accept(false)
+        viewModel.didSelectSecond.accept(false)
         
         // Then
         XCTAssertEqual([try isFirstEnabled.toBlocking().first(),
@@ -98,8 +121,8 @@ class ViewModelTests: XCTestCase {
                         try isThirdEnabled.toBlocking().first()],
                        [
                         false,
-                        true,
-                        false
+                        false,
+                        true
         ])
     }
 
