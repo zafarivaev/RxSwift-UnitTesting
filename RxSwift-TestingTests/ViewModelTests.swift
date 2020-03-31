@@ -53,9 +53,9 @@ class ViewModelTests: XCTestCase {
             .bind(to: isThirdEnabled)
             .disposed(by: DisposeBag())
         
-        XCTAssertEqual(isFirstEnabled.events, [.next(0, false)])
-        XCTAssertEqual(isSecondEnabled.events, [.next(0, false)])
-        XCTAssertEqual(isThirdEnabled.events, [.next(0, false)])
+        XCTAssertRecordedElements(isFirstEnabled.events, [false])
+        XCTAssertRecordedElements(isSecondEnabled.events, [false])
+        XCTAssertRecordedElements(isThirdEnabled.events, [false])
     }
     
     // MARK: - RxBlocking
